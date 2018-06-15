@@ -1,7 +1,4 @@
 {
   "presets": ["@babel/preset-env"],
-  "plugins": [
-    "@babel/plugin-proposal-pipeline-operator",
-    "transform-es2015-modules-commonjs"
-  ]
+  "plugins": ["@babel/plugin-proposal-pipeline-operator"]
 }
