@@ -1,0 +1,42 @@
+0 silly input [ 'start' ]
+1 silly flags { _: [ 'run' ],
+1 silly flags   'reject-cycles': false,
+1 silly flags   rejectCycles: false,
+1 silly flags   script: 'start',
+1 silly flags   args: [] }
+2 verbose rootPath C:\Users\kanit\Desktop\open-source\pokemonads
+3 info version 2.11.0
+4 silly existsSync C:\Users\kanit\Desktop\open-source\pokemonads\VERSION
+5 info versioning independent
+6 silly initialize attempt
+7 silly initialize success
+8 silly execute attempt
+9 silly runScriptInDir start [] adts
+10 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\adts' }
+11 silly runScriptInDir start [] combinators
+12 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\combinators' }
+13 error start Errored while running script in '@pokemonads/combinators'
+14 error execute callback with error
+15 error Error: Command failed: yarn run start
+15 error module.js:549
+15 error     throw err;
+15 error     ^
+15 error
+15 error Error: Cannot find module '../buildscripts/start'
+15 error     at Function.Module._resolveFilename (module.js:547:15)
+15 error     at Function.Module._load (module.js:474:25)
+15 error     at Module.require (module.js:596:17)
+15 error     at require (internal/module.js:11:18)
+15 error     at Object.<anonymous> (C:\Users\kanit\Desktop\open-source\pokemonads\packages\combinators\builder.js:1:63)
+15 error     at Module._compile (module.js:652:30)
+15 error     at Object.Module._extensions..js (module.js:663:10)
+15 error     at Module.load (module.js:565:32)
+15 error     at tryModuleLoad (module.js:505:12)
+15 error     at Function.Module._load (module.js:497:3)
+15 error error Command failed with exit code 1.
+15 error yarn run v1.6.0
+15 error $ node builder.js
+15 error info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+15 error
+15 error     at Promise.all.then.arr (C:\Users\kanit\AppData\Roaming\npm-cache\_npx\67784\node_modules\lerna\node_modules\execa\index.js:236:11)
+15 error     at <anonymous>
