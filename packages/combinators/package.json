@@ -1,6 +1,6 @@
 {
   "name": "@pokemonads/combinators",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/main.js",
   "scripts": {
@@ -8,6 +8,9 @@
     "start": "node builder.js",
     "build": "webpack --mode=production"
   },
-  "author": "Kanit Sharma",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "kanitsharma",
   "license": "MIT"
 }
