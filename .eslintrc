@@ -1,23 +1,15 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "standard"
-  ],
-  "plugins": [
-    "babel",
-    "promise",
-    "prettier"
-  ],
+  "extends": ["standard"],
+  "plugins": ["babel", "promise", "prettier"],
   "env": {
     "browser": true
   },
   "rules": {
     "key-spacing": "off",
-    "object-curly-spacing": [
-      2,
-      "always"
-    ],
+    "object-curly-spacing": [2, "always"],
     "comma-dangle": "off",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "space-before-function-paren": "off"
   }
 }
