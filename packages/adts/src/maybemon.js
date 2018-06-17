@@ -2,38 +2,56 @@
 import { taggedSum } from 'daggy'
 import { k, i } from '../../combinators/src/index'
 
-const Maybe = taggedSum({
+const Maybe = taggedSum('Maybe', {
   Some: ['x'],
   None: []
 })
 
-Maybe.of = Maybe.Some
-Maybe.empty = () => Maybe.None
-
-Maybe.prototype.fold = (f, g) =>
-  this.cata({
+Maybe.prototype.fold = function(f, g) {
+  return this.cata({
     Some: f,
     None: g
   })
+}
 
-Maybe.prototype.orElse = x => this.fold(Maybe.Some, k(x))
+Maybe.of = Maybe.Some
+Maybe.empty = () => Maybe.None
 
-Maybe.prototype.getOrElse = x => this.fold(i, k(x))
+Maybe.prototype.orElse = function(x) {
+  return this.fold(Maybe.Some, k(x))
+}
 
-Maybe.prototype.map = f => this.chain(a => Maybe.of(f(a)))
+Maybe.prototype.getOrElse = function(x) {
+  return this.fold(i, k(x))
+}
 
-Maybe.prototype.chain = f => this.fold(a => f(a), k(Maybe.None))
+Maybe.prototype.chain = function(f) {
+  return this.fold(a => f(a), k(Maybe.None))
+}
 
-Maybe.prototype.concat = x => this.chain(a => x.map(b => a.concat(b)))
+Maybe.prototype.concat = function(x) {
+  return this.chain(a => {
+    return x.map(b => a.concat(b))
+  })
+}
 
-Maybe.prototype.ap = a => this.chain(f => a.map(f))
+Maybe.prototype.map = function(f) {
+  return this.chain(a => Maybe.of(f(a)))
+}
 
-Maybe.prototype.sequence = p => this.traverse(i, p)
+Maybe.prototype.ap = function(a) {
+  return this.chain(f => a.map(f))
+}
 
-Maybe.prototype.traverse = (f, p) =>
-  this.cata({
+Maybe.prototype.sequence = function(p) {
+  return this.traverse(i, p)
+}
+
+Maybe.prototype.traverse = function(f, p) {
+  return this.cata({
     Some: x => f(x).map(Maybe.of),
     None: () => p.of(Maybe.None)
   })
+}
 
 export default Maybe

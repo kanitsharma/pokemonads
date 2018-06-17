@@ -1,5 +1,4 @@
 import Maybe from './maybemon'
+import Either from './eithermon'
 
-export default {
-  Maybe
-}
+export { Maybe, Either }
