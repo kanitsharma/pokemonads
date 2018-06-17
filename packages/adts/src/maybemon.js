@@ -1,6 +1,6 @@
 // Maybe type
 import { taggedSum } from 'daggy'
-import { k, i } from '../../combinators'
+import { k, i } from '../../combinators/src/index'
 
 const Maybe = taggedSum({
   Some: ['x'],

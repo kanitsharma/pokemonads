@@ -8,6 +8,9 @@
     "start": "node buildscripts/start.js",
     "build": "webpack --mode=production"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {

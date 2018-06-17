@@ -1,42 +1,136 @@
-0 silly input [ 'start' ]
-1 silly flags { _: [ 'run' ],
-1 silly flags   'reject-cycles': false,
-1 silly flags   rejectCycles: false,
-1 silly flags   script: 'start',
-1 silly flags   args: [] }
+0 silly input [ 'publish' ]
+1 silly flags { _: [ 'publish' ], 'reject-cycles': false, rejectCycles: false }
 2 verbose rootPath C:\Users\kanit\Desktop\open-source\pokemonads
 3 info version 2.11.0
-4 silly existsSync C:\Users\kanit\Desktop\open-source\pokemonads\VERSION
-5 info versioning independent
-6 silly initialize attempt
-7 silly initialize success
-8 silly execute attempt
-9 silly runScriptInDir start [] adts
-10 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\adts' }
-11 silly runScriptInDir start [] combinators
-12 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\combinators' }
-13 error start Errored while running script in '@pokemonads/combinators'
-14 error execute callback with error
-15 error Error: Command failed: yarn run start
-15 error module.js:549
-15 error     throw err;
-15 error     ^
-15 error
-15 error Error: Cannot find module '../buildscripts/start'
-15 error     at Function.Module._resolveFilename (module.js:547:15)
-15 error     at Function.Module._load (module.js:474:25)
-15 error     at Module.require (module.js:596:17)
-15 error     at require (internal/module.js:11:18)
-15 error     at Object.<anonymous> (C:\Users\kanit\Desktop\open-source\pokemonads\packages\combinators\builder.js:1:63)
-15 error     at Module._compile (module.js:652:30)
-15 error     at Object.Module._extensions..js (module.js:663:10)
-15 error     at Module.load (module.js:565:32)
-15 error     at tryModuleLoad (module.js:505:12)
-15 error     at Function.Module._load (module.js:497:3)
-15 error error Command failed with exit code 1.
-15 error yarn run v1.6.0
-15 error $ node builder.js
-15 error info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
-15 error
-15 error     at Promise.all.then.arr (C:\Users\kanit\AppData\Roaming\npm-cache\_npx\67784\node_modules\lerna\node_modules\execa\index.js:236:11)
-15 error     at <anonymous>
+4 silly isInitialized
+5 silly isInitialized true
+6 silly existsSync C:\Users\kanit\Desktop\open-source\pokemonads\VERSION
+7 info versioning independent
+8 silly initialize attempt
+9 silly isDetachedHead
+10 silly getCurrentBranch
+11 verbose getCurrentBranch master
+12 verbose isDetachedHead false
+13 silly getCurrentBranch
+14 verbose getCurrentBranch master
+15 silly getUpdates
+16 info Checking for updated packages...
+17 silly hasTags
+18 verbose hasTags true
+19 silly getLastTag
+20 verbose getLastTag @pokemonads/adts@0.0.3
+21 info Comparing with @pokemonads/adts@0.0.3.
+22 silly diffSinceIn @pokemonads/adts@0.0.3 packages/adts
+23 silly diff packages/adts/package.json
+23 silly diff packages/adts/src/maybemon.js
+24 silly diffSinceIn @pokemonads/adts@0.0.3 packages/combinators
+25 silly diff packages/combinators/package.json
+26 verbose updated @pokemonads/adts
+27 verbose updated @pokemonads/combinators
+28 info Checking for prereleased packages...
+29 silly collectDependents
+30 silly isPackageDependentOf @pokemonads/adts @pokemonads/adts
+31 silly isPackageDependentOf @pokemonads/adts @pokemonads/combinators
+32 silly isPackageDependentOf @pokemonads/combinators @pokemonads/adts
+33 silly isPackageDependentOf @pokemonads/combinators @pokemonads/combinators
+34 silly collectUpdates
+35 verbose has filtered update @pokemonads/adts
+36 verbose has filtered update @pokemonads/combinators
+37 silly initialize success
+38 silly execute attempt
+39 silly runScriptSync preversion Moduleinator
+40 silly runScriptSync preversion @pokemonads/adts
+41 silly runScriptSync version @pokemonads/adts
+42 silly runScriptSync preversion @pokemonads/combinators
+43 silly runScriptSync version @pokemonads/combinators
+44 silly runScriptSync version Moduleinator
+45 silly addFile C:\Users\kanit\Desktop\open-source\pokemonads\packages\adts\package.json
+46 silly addFile C:\Users\kanit\Desktop\open-source\pokemonads\packages\combinators\package.json
+47 silly commit Publish
+47 silly commit
+47 silly commit  - @pokemonads/adts@0.0.4
+47 silly commit  - @pokemonads/combinators@0.0.3
+48 verbose commit [ 'commit',
+48 verbose commit   '--no-verify',
+48 verbose commit   '-F',
+48 verbose commit   'C:\\Users\\kanit\\AppData\\Local\\Temp\\af3ba99c-d5b4-42b0-9bb0-2f406445c293\\lerna-commit.txt' ]
+49 silly addTag @pokemonads/adts@0.0.4
+50 silly addTag @pokemonads/combinators@0.0.3
+51 silly runScriptSync postversion @pokemonads/adts
+52 silly runScriptSync postversion @pokemonads/combinators
+53 silly runScriptSync postversion Moduleinator
+54 info publish Publishing packages to npm...
+55 silly existsSync C:\Users\kanit\Desktop\open-source\pokemonads\packages\adts\scripts\prepublish.js
+56 verbose execScript No prepublish script found at C:\Users\kanit\Desktop\open-source\pokemonads\packages\adts\scripts\prepublish.js
+57 silly existsSync C:\Users\kanit\Desktop\open-source\pokemonads\packages\combinators\scripts\prepublish.js
+58 verbose execScript No prepublish script found at C:\Users\kanit\Desktop\open-source\pokemonads\packages\combinators\scripts\prepublish.js
+59 verbose publishing @pokemonads/adts
+60 silly publishTaggedInDir latest adts
+61 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\adts' }
+62 verbose publishing @pokemonads/combinators
+63 silly publishTaggedInDir latest combinators
+64 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\combinators' }
+65 error publish Retrying failed publish: @pokemonads/adts
+66 verbose publish error undefined
+67 verbose publishing @pokemonads/adts
+68 silly publishTaggedInDir latest adts
+69 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\adts' }
+70 error publish Retrying failed publish: @pokemonads/combinators
+71 verbose publish error undefined
+72 verbose publishing @pokemonads/combinators
+73 silly publishTaggedInDir latest combinators
+74 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\combinators' }
+75 error publish Retrying failed publish: @pokemonads/adts
+76 verbose publish error undefined
+77 verbose publishing @pokemonads/adts
+78 silly publishTaggedInDir latest adts
+79 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\adts' }
+80 error publish Retrying failed publish: @pokemonads/combinators
+81 verbose publish error undefined
+82 verbose publishing @pokemonads/combinators
+83 silly publishTaggedInDir latest combinators
+84 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\combinators' }
+85 error publish Retrying failed publish: @pokemonads/adts
+86 verbose publish error undefined
+87 verbose publishing @pokemonads/adts
+88 silly publishTaggedInDir latest adts
+89 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\adts' }
+90 error publish Retrying failed publish: @pokemonads/combinators
+91 verbose publish error undefined
+92 verbose publishing @pokemonads/combinators
+93 silly publishTaggedInDir latest combinators
+94 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\combinators' }
+95 error publish Retrying failed publish: @pokemonads/adts
+96 verbose publish error undefined
+97 verbose publishing @pokemonads/adts
+98 silly publishTaggedInDir latest adts
+99 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\adts' }
+100 error publish Retrying failed publish: @pokemonads/combinators
+101 verbose publish error undefined
+102 verbose publishing @pokemonads/combinators
+103 silly publishTaggedInDir latest combinators
+104 silly getExecOpts { cwd: 'C:\\Users\\kanit\\Desktop\\open-source\\pokemonads\\packages\\combinators' }
+105 error publish Ran out of retries while publishing @pokemonads/combinators Error: Command failed: yarn publish --tag latest --new-version 0.0.3
+105 error publish error Couldn't publish package.
+105 error publish yarn publish v1.6.0
+105 error publish [1/4] Bumping version...
+105 error publish info Current version: 0.0.3
+105 error publish [2/4] Logging in...
+105 error publish [3/4] Publishing...
+105 error publish info Visit https://yarnpkg.com/en/docs/cli/publish for documentation about this command.
+105 error publish
+105 error publish     at Promise.all.then.arr (C:\Users\kanit\Desktop\open-source\pokemonads\node_modules\execa\index.js:236:11)
+105 error publish     at <anonymous>
+105 error publish     at process._tickCallback (internal/process/next_tick.js:188:7)
+106 error execute callback with error
+107 error Error: Command failed: yarn publish --tag latest --new-version 0.0.3
+107 error error Couldn't publish package.
+107 error yarn publish v1.6.0
+107 error [1/4] Bumping version...
+107 error info Current version: 0.0.3
+107 error [2/4] Logging in...
+107 error [3/4] Publishing...
+107 error info Visit https://yarnpkg.com/en/docs/cli/publish for documentation about this command.
+107 error
+107 error     at Promise.all.then.arr (C:\Users\kanit\Desktop\open-source\pokemonads\node_modules\execa\index.js:236:11)
+107 error     at <anonymous>
