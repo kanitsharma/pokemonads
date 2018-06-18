@@ -7,14 +7,18 @@ const Either = taggedSum('Either', {
   Right: ['r']
 })
 
+Either.of = Either.Right
+Either.Left = Either.Left
+Either.Right = Either.Right
+
+// Monad, Monoid
+
 Either.prototype.fold = function(f, g) {
   return this.cata({
     Left: f,
     Right: g
   })
 }
-
-Either.of = Either.Right
 
 Either.prototype.swap = function() {
   return this.fold(l => Either.Right(l), r => Either.Left(r))
