@@ -2,7 +2,7 @@
 // s -> Pair(a, s)
 import { tagged } from 'daggy'
 
-const Pair = tagged('Pair', ['value', 'state'])
+export const Pair = tagged('Pair', ['value', 'state'])
 
 const State = st => ({
   runState: x => st(x),
