@@ -17,6 +17,7 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
-    "daggy": "^1.2.0"
+    "daggy": "^1.2.0",
+    "fluture": "^8.0.2"
   }
 }
