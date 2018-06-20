@@ -25,6 +25,7 @@ const State = st => ({
       const { state } = st(s)
       return Pair(state, state)
     }),
+  modify: f => State(s => Pair(undefined, f(s))),
   put: s =>
     State(ss => {
       const { value } = st(ss)
