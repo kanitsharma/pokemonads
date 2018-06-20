@@ -10,6 +10,7 @@ Either.Right(10)
 const res = State.put(10)
   .map(x => x * 10)
   .runState(10)
+  .snd()
 
 IO.of(_ => {
   console.log('I am impure')

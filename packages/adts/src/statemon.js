@@ -1,8 +1,6 @@
 // State Monad
 // s -> Pair(a, s)
-import { tagged } from 'daggy'
-
-export const Pair = tagged('Pair', ['value', 'state'])
+import Pair from './pairmon'
 
 const State = st => ({
   runState: x => st(x),
