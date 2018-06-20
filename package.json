@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node buildscripts/start.js",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "publish": "lerna publish"
   },
   "publishConfig": {
     "access": "public"

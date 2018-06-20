@@ -1,4 +1,4 @@
-const { Maybe, Either, State, IO, Future } = require('./dist/main')
+const { Maybe, Either, State, IO, Future, Reader } = require('./dist/main')
 
 const res = Maybe.of(undefined)
   .map(x => x * 100)
@@ -28,5 +28,11 @@ Future((rej, res) => {
 })
   .map(_ => console.log('I am async'))
   .value(console.log)
+
+Reader.of(100)
+  .map(x => x + 10)
+  .chain(x => Reader.ask.map(y => x + y))
+  .map(console.log)
+  .run(200)
 
 console.log(res)
