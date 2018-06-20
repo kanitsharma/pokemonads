@@ -3,22 +3,35 @@ import { taggedSum } from 'daggy'
 import { k, i } from '../../combinators/src/index'
 
 const Maybe = taggedSum('Maybe', {
-  Some: ['x'],
-  None: []
+  Just: ['x'],
+  Nothing: []
 })
 
 Maybe.prototype.fold = function(f, g) {
   return this.cata({
-    Some: f,
-    None: g
+    Just: f,
+    Nothing: g
   })
 }
 
-Maybe.of = Maybe.Some
-Maybe.empty = () => Maybe.None
+Maybe.of = Maybe.Just
+Maybe.empty = () => Maybe.Nothing
+Maybe.fromNullable = val => (val ? Maybe.Just(val) : Maybe.Nothing())
+
+Maybe.prototype.inspect = function() {
+  return this.isJust() ? `Just(${this.x})` : `Nothing()`
+}
+
+Maybe.prototype.isJust = function() {
+  return !!this.x
+}
+
+Maybe.prototype.isNothing = function() {
+  return !this.x
+}
 
 Maybe.prototype.orElse = function(x) {
-  return this.fold(Maybe.Some, k(x))
+  return this.fold(Maybe.Just, k(x))
 }
 
 Maybe.prototype.getOrElse = function(x) {
@@ -26,7 +39,7 @@ Maybe.prototype.getOrElse = function(x) {
 }
 
 Maybe.prototype.chain = function(f) {
-  return this.fold(a => f(a), k(Maybe.None))
+  return this.fold(a => f(a), k(Maybe.Nothing))
 }
 
 Maybe.prototype.concat = function(x) {
@@ -49,8 +62,8 @@ Maybe.prototype.sequence = function(p) {
 
 Maybe.prototype.traverse = function(f, p) {
   return this.cata({
-    Some: x => f(x).map(Maybe.of),
-    None: () => p.of(Maybe.None)
+    Just: x => f(x).map(Maybe.of),
+    Nothing: () => p.of(Maybe.Nothing)
   })
 }
 

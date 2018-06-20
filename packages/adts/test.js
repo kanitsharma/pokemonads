@@ -1,13 +1,16 @@
 const { Maybe, Either, State, IO, Future } = require('./dist/main')
 
-Maybe.of(undefined).map(console.log)
+const res = Maybe.of(undefined)
+  .map(x => x * 100)
+  .isNothing()
+
 Maybe.of(10).map(console.log)
 
 Either.Right(10)
   .map(x => undefined)
   .map(console.log)
 
-const res = State.put(10)
+const res1 = State.put(10)
   .map(x => x * 10)
   .runState(10)
   .snd()
