@@ -1,3 +1,8 @@
-const { i, k } = require('./dist/main')
+const { i, k, compose } = require('./dist/main')
 
-console.log(i(19), k(10)())
+console.log(
+  compose(
+    i,
+    k
+  )(20)()
+)

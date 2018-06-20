@@ -1,20 +1,22 @@
-const { Maybe, Either, State } = require('./dist/main')
+const { Maybe, Either, State, IO } = require('./dist/main')
 
-// Maybe.of(undefined).map(console.log)
-// Maybe.of(10).map(console.log)
+Maybe.of(undefined).map(console.log)
+Maybe.of(10).map(console.log)
 
-// Either.Right(10)
-//   .map(x => undefined)
-//   .map(console.log)
+Either.Right(10)
+  .map(x => undefined)
+  .map(console.log)
 
 const res = State.put(10)
+  .map(x => x * 10)
+  .runState(10)
 
-const res2 = res.exec()
+IO.of(_ => {
+  console.log('I am impure')
+  return 10
+})
+  .map(x => console.log('i am impure too' + x))
+  .chain(_ => IO(_ => console.log('I am super impure')))
+  .run()
 
-const res3 = res.exec()
-
-const res4 = res.map(x => x * 10)
-
-const res5 = res.inspect()
-
-console.log(res, res2, res3, res4, res5)
+console.log(res)
