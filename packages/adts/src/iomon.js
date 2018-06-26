@@ -25,5 +25,9 @@ const IO = g => {
 }
 
 IO.of = f => IO(f)
+IO.print = x => {
+  console.log(x)
+  return x
+}
 
 export default IO
