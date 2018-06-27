@@ -1,5 +1,5 @@
-import k from './k'
-import i from './i'
+import K from './k'
+import I from './i'
 import compose from './compose'
 
-export { i, k, compose }
+export { I, K, compose }
