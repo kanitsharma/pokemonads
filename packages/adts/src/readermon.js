@@ -1,11 +1,11 @@
 import { tagged } from 'daggy'
-import { k, i } from '../../combinators/src/index'
+import { K, I } from '../../combinators/src/index'
 
 const Reader = tagged('Reader', ['run'])
 
-Reader.of = a => Reader(k(a))
+Reader.of = a => Reader(K(a))
 
-Reader.ask = Reader(i)
+Reader.ask = Reader(I)
 
 Reader.prototype.chain = function(f) {
   return Reader(e => f(this.run(e)).run(e))

@@ -1,10 +1,10 @@
-import { k, compose } from '../../combinators/src/index'
+import { K, compose } from '../../combinators/src/index'
 
 const IO = g => {
   const map = f =>
     compose(
       IO,
-      k,
+      K,
       f,
       g
     )()

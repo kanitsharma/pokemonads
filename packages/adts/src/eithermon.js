@@ -1,6 +1,6 @@
 // Either Type
 import { taggedSum } from 'daggy'
-import { i } from '../../combinators/src/index'
+import { I } from '../../combinators/src/index'
 
 const Either = taggedSum('Either', {
   Left: ['l'],
@@ -50,7 +50,7 @@ Either.prototype.ap = function(a) {
 }
 
 Either.prototype.sequence = function(p) {
-  return this.traverse(i, p)
+  return this.traverse(I, p)
 }
 
 Either.prototype.traverse = function(f, p) {

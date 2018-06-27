@@ -1,6 +1,6 @@
 // Maybe type
 import { taggedSum } from 'daggy'
-import { k, i } from '../../combinators/src/index'
+import { K, I } from '../../combinators/src/index'
 
 const Maybe = taggedSum('Maybe', {
   Just: ['x'],
@@ -31,15 +31,15 @@ Maybe.prototype.isNothing = function() {
 }
 
 Maybe.prototype.orElse = function(x) {
-  return this.fold(Maybe.Just, k(x))
+  return this.fold(Maybe.Just, K(x))
 }
 
 Maybe.prototype.getOrElse = function(x) {
-  return this.fold(i, k(x))
+  return this.fold(i, K(x))
 }
 
 Maybe.prototype.chain = function(f) {
-  return this.fold(a => f(a), k(Maybe.Nothing))
+  return this.fold(a => f(a), K(Maybe.Nothing))
 }
 
 Maybe.prototype.concat = function(x) {
@@ -57,7 +57,7 @@ Maybe.prototype.ap = function(a) {
 }
 
 Maybe.prototype.sequence = function(p) {
-  return this.traverse(i, p)
+  return this.traverse(I, p)
 }
 
 Maybe.prototype.traverse = function(f, p) {

@@ -1,4 +1,5 @@
 const { Maybe, Either, State, IO, Future, Reader } = require('./dist/main')
+const { map, chain, compose } = require('../combinators/dist/main')
 
 const res = Maybe.of(undefined)
   .map(x => x * 100)
@@ -36,3 +37,11 @@ Reader.of(100)
   .run(200)
 
 console.log(res)
+
+const resP = compose(
+  chain(x => map(y => x + y, Reader.ask)),
+  map(x => x * 10),
+  Reader.of
+)
+
+console.log(resP(10).run(1))
