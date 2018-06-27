@@ -15,5 +15,8 @@
     "webpack-cli": "^3.0.8"
   },
   "author": "kanitsharma",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "ramda": "^0.25.0"
+  }
 }
