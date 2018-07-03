@@ -1,4 +1,4 @@
-# Fistfull of monads and more
+# Fistful of monads and more
 
 ## ADTs -> Contains all basic monads
 
