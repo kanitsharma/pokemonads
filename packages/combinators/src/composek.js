@@ -5,7 +5,7 @@ const argsToListandRev = f => (...args) => f([...args.reverse()])
 
 const composeK = argsToListandRev(([last, ...first]) =>
   compose(
-    ...first.map(chain),
+    ...first.map(x => chain(x)),
     last
   )
 )

@@ -1,4 +1,4 @@
-const { i, k, compose, composeK } = require('./dist/main')
+const { I, K, compose, composeK, curry, chain } = require('./dist/main')
 
 const monad = x => ({
   map: fn => monad(fn(x)),
@@ -8,8 +8,8 @@ const monad = x => ({
 
 console.log(
   compose(
-    i,
-    k
+    I,
+    K
   )(20)()
 )
 
@@ -18,5 +18,15 @@ console.log(
     x => monad(x + 10),
     x => monad(x + 20),
     (x, y, z) => monad(x + y + z)
-  )(1, 2, 3)
+  )(1, 2, 3).fold()
 )
+
+// const a = curry((a, b) => a + b)
+
+const a = compose(
+  chain(x => monad(x + 1)),
+  chain(x => monad(x + 20)),
+  monad
+)
+
+console.log(a(1).fold())
