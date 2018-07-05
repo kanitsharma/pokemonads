@@ -21,7 +21,9 @@ console.log(
   )(1, 2, 3).fold()
 )
 
-// const a = curry((a, b) => a + b)
+const b = curry((a, b) => a + b)
+
+console.log([1, 2, 3].map(b))
 
 const a = compose(
   chain(x => monad(x + 1)),
