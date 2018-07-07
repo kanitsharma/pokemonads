@@ -1,6 +1,6 @@
 # Pokemonads
 
-Pokemonads is a collection of common algebraic data types which are compatible with [Fantasy Land](https://github.com/fantasyland/fantasy-land/)
+Pokemonads is a collection of common algebraic data types and combinators which are compatible with [Fantasy Land](https://github.com/fantasyland/fantasy-land/)
 
 documentation coming up soon :)
 
