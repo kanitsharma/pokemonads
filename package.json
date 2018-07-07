@@ -9,8 +9,13 @@
     "build": "webpack --mode=production",
     "publish": "lerna publish"
   },
+  "homepage": "https://github.com/kanitsharma/pokemonads",
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kanitsharma/pokemonads"
   },
   "author": "",
   "license": "ISC",

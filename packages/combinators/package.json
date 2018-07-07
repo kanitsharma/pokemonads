@@ -7,6 +7,11 @@
     "test": "node test.js",
     "build": "webpack --mode=production"
   },
+  "homepage": "https://github.com/kanitsharma/pokemonads",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kanitsharma/pokemonads"
+  },
   "publishConfig": {
     "access": "public"
   },
