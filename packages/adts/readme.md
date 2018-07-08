@@ -22,6 +22,26 @@ The Maybe type is the most common way of representing nothingness (or the null t
 
 Maybe is effectively abstract and has two concrete subtypes: Some (also Just) and None (also Nothing).
 
+#### Example
+
+```javascript
+import { Maybe } from '@pokemonads/adts'
+import { compose, map } from '@pokemonads/combinators'
+import { prop } from 'ramda'
+
+const a = { x: 10 }
+const b = { z: 'no x here' }
+
+const addToObject = compose(
+  map(inc),
+  map(prop('x')),
+  Maybe.of
+)
+
+console.log(addToObject(a)) // Just(11)
+console.log(addToObject(b)) // Nothing()
+```
+
 ### Either
 
 Either (or the disjunct union) is a type that can either hold a value of type A or a value of type B but never at the same time. Typically it is used to represent computations that can fail with an error. Think of it as a better way to handle exceptions. We think of an Either as having two sides, the success is held on the right and the failure on the left. This is a right biased either which means that map and flatMap (bind) will operate on the right side of the either.
