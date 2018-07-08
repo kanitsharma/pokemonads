@@ -130,6 +130,13 @@ Pair allows the ability to represent two distinct values of different types.
 
 As Pair is a Bifunctor, it can vary in each of the two types it represents. When used as a normal Functor, Pair will always have a bias for the far right or second value,
 
+```javascript
+import { Pair } from '@pokemonads/adts'
+
+const a = Pair(10, 11)
+console.log(a.fst(), a.snd())
+```
+
 ### State
 
 State is an Algebraic Data Type that abstracts away the associated state management that comes with stateful computations.State is parameterized by two types, a state S and a resultant A. The resultant portion may vary it's type, but the state portion must be fixed to a type that is used by all related stateful computations.

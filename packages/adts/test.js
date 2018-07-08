@@ -1,4 +1,12 @@
-const { Maybe, Either, State, IO, Future, Reader } = require('./dist/main')
+const {
+  Maybe,
+  Either,
+  State,
+  IO,
+  Future,
+  Reader,
+  Pair
+} = require('./dist/main')
 const { map, chain, compose, composeK, I } = require('../combinators/dist/main')
 const { prop, inc, ifElse, has } = require('ramda')
 
@@ -67,24 +75,16 @@ const asyncComp = compose(
 )
 
 const cancel = asyncComp(10).value(console.log)
+
+// Pair
+
+const a = Pair(10, 11)
+console.log(a.fst(), a.snd())
+
 // const res1 = State.put(10)
 //   .map(x => x * 10)
 //   .runState(10)
 //   .snd()
-
-// IO.of(_ => {
-//   console.log('I am impure')
-//   return 10
-// })
-//   .map(x => console.log('i am impure too' + x))
-//   .chain(_ => IO(_ => console.log('I am super impure')))
-//   .run()
-
-// Future((rej, res) => {
-//   setTimeout(_ => res(), 1000)
-// })
-//   .map(_ => console.log('I am async'))
-//   .value(console.log)
 
 // Reader.of(100)
 //   .map(x => x + 10)
