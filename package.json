@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node buildscripts/start.js",
     "build": "webpack --mode=production",
-    "publish": "lerna publish"
+    "publish": "lerna run build && lerna publish"
   },
   "homepage": "https://github.com/kanitsharma/pokemonads",
   "publishConfig": {
