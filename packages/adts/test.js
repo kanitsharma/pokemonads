@@ -53,6 +53,20 @@ const c = impureComputation(10)
 
 console.log(c.run())
 
+// Future
+
+const apiCall = x =>
+  Future((_, resolve) => {
+    setTimeout(_ => resolve({ a: x }), 500)
+  })
+
+const asyncComp = compose(
+  map(inc),
+  map(prop('a')),
+  apiCall
+)
+
+const cancel = asyncComp(10).value(console.log)
 // const res1 = State.put(10)
 //   .map(x => x * 10)
 //   .runState(10)

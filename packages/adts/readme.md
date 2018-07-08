@@ -101,9 +101,28 @@ console.log(c.run())
 
 ### Future
 
-Fluture offers a control structure similar to Promises, Tasks, Deferreds, and what-have-you.
+Future offers a control structure similar to Promises, Tasks, Deferreds, and what-have-you.
 
 Much like Promises, Futures represent the value arising from the success or failure of an asynchronous operation (I/O). Though unlike Promises, Futures are lazy and adhere to the monadic interface.
+
+```javascript
+import { Future } from '@pokemonads/adts'
+import { compose, map } from '@pokemonads/combinators'
+import { prop, inc } from 'ramda'
+
+const apiCall = x =>
+  Future((_, resolve) => {
+    setTimeout(_ => resolve({ a: x }), 500)
+  })
+
+const asyncComp = compose(
+  map(inc),
+  map(prop('a')),
+  apiCall
+)
+
+const cancel = asyncComp(10).value(console.log)
+```
 
 ### Pair
 
