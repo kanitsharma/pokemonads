@@ -162,3 +162,22 @@ console.log(sa('Yo').eval())
 The Reader monad is a wonderful solution to inject dependencies into your functions.
 
 The Reader monad provides a way to "weave" your configuration throughout your programme.
+
+```javascript
+import { Reader } from '@pokemonads/adts'
+import { compose, map, chain } from '@pokemonads/combinators'
+import { prop, inc } from 'ramda'
+
+const getConfig = x => map(config => config + ' ' + x, Reader.ask)
+
+const ra = compose(
+  chain(getConfig),
+  map(inc),
+  map(prop('x')),
+  Reader.of
+)
+
+const res = ra({ x: 10 }).run('This is config') // added config
+
+console.log(res) // This is config 11
+```

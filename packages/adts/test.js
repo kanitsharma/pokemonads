@@ -7,7 +7,7 @@ const {
   Reader,
   Pair
 } = require('./dist/main')
-const { map, chain, compose, composeK, I } = require('../combinators/dist/main')
+const { map, chain, compose, composeK } = require('../combinators/dist/main')
 const { prop, inc, ifElse, has } = require('ramda')
 
 // Maybe
@@ -94,23 +94,18 @@ const sa = compose(
 )
 
 console.log(sa('Yo').eval())
-// const res1 = State.put(10)
-//   .map(x => x * 10)
-//   .runState(10)
-//   .snd()
 
-// Reader.of(100)
-//   .map(x => x + 10)
-//   .chain(x => Reader.ask.map(y => x + y))
-//   .map(console.log)
-//   .run(200)
+// Reader
 
-// console.log(res)
+const getConfig = x => map(config => config + x, Reader.ask)
 
-// const resP = compose(
-//   chain(x => map(y => x + y, Reader.ask)),
-//   map(x => x * 10),
-//   Reader.of
-// )
+const ra = compose(
+  chain(getConfig),
+  map(inc),
+  map(prop('x')),
+  Reader.of
+)
 
-// console.log(resP(10).run(1))
+const res = ra({ x: 10 }).run('This is config') // added config
+
+console.log(res)
