@@ -141,6 +141,22 @@ console.log(a.fst(), a.snd())
 
 State is an Algebraic Data Type that abstracts away the associated state management that comes with stateful computations.State is parameterized by two types, a state S and a resultant A. The resultant portion may vary it's type, but the state portion must be fixed to a type that is used by all related stateful computations.
 
+```javascript
+import { State } from '@pokemonads/adts'
+
+const comp1 = x => x + ' Comp1'
+
+const comp2 = x => x + ' Comp2'
+
+const sa = compose(
+  map(comp2),
+  map(comp1),
+  State.of
+)
+
+console.log(sa('Yo').eval())
+```
+
 ### Reader
 
 The Reader monad is a wonderful solution to inject dependencies into your functions.

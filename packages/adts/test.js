@@ -74,13 +74,26 @@ const asyncComp = compose(
   apiCall
 )
 
-const cancel = asyncComp(10).value(console.log)
+asyncComp(10).value(console.log)
 
 // Pair
 
 const a = Pair(10, 11)
 console.log(a.fst(), a.snd())
 
+// State
+
+const comp1 = x => x + ' Comp1'
+
+const comp2 = x => x + ' Comp2'
+
+const sa = compose(
+  map(comp2),
+  map(comp1),
+  State.of
+)
+
+console.log(sa('Yo').eval())
 // const res1 = State.put(10)
 //   .map(x => x * 10)
 //   .runState(10)
