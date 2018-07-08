@@ -1,6 +1,6 @@
 {
   "name": "@pokemonads/combinators",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "",
   "main": "dist/main.js",
   "scripts": {
@@ -12,6 +12,12 @@
     "type": "git",
     "url": "https://github.com/kanitsharma/pokemonads"
   },
+  "keywords": [
+    "functional programming",
+    "combinators",
+    "lambda-calculus",
+    "point-free"
+  ],
   "publishConfig": {
     "access": "public"
   },
