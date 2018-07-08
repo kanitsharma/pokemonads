@@ -27,7 +27,7 @@ Maybe is effectively abstract and has two concrete subtypes: Some (also Just) an
 ```javascript
 import { Maybe } from '@pokemonads/adts'
 import { compose, map } from '@pokemonads/combinators'
-import { prop } from 'ramda'
+import { prop, inc } from 'ramda'
 
 const a = { x: 10 }
 const b = { z: 'no x here' }
@@ -45,6 +45,21 @@ console.log(addToObject(b)) // Nothing()
 ### Either
 
 Either (or the disjunct union) is a type that can either hold a value of type A or a value of type B but never at the same time. Typically it is used to represent computations that can fail with an error. Think of it as a better way to handle exceptions. We think of an Either as having two sides, the success is held on the right and the failure on the left. This is a right biased either which means that map and flatMap (bind) will operate on the right side of the either.
+
+```javascript
+import { Either } from '@pokemonads/adts'
+import { compose, map } from '@pokemonads/combinators'
+import { prop, has, inc } from 'ramda'
+
+const getAndAdd = compose(
+  map(inc),
+  map(prop('x')),
+  ifElse(has('x'), Either.Right, Either.Left)
+)
+
+console.log(getAndAdd({ x: 10 })) // Right({ x: 11 })
+console.log(getAndAdd({ y: 10 })) // Left({ y: 10 })
+```
 
 ### IO
 

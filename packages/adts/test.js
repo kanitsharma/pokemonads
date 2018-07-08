@@ -1,12 +1,9 @@
 const { Maybe, Either, State, IO, Future, Reader } = require('./dist/main')
 const { map, chain, compose } = require('../combinators/dist/main')
-const { prop, inc } = require('ramda')
+const { prop, inc, ifElse, has } = require('ramda')
 
-const res = Maybe.of(undefined)
-  .map(x => x * 100)
-  .isNothing()
-
-const z = { x: 10 }
+// Maybe
+const ma = { x: 10 }
 
 const addToObject = compose(
   map(inc),
@@ -14,9 +11,16 @@ const addToObject = compose(
   Maybe.of
 )
 
-console.log(addToObject(z))
+console.log(addToObject(ma))
 
-// Maybe.of(10).map(console.log)
+// Either
+const getAndAdd = compose(
+  map(inc),
+  map(prop('x')),
+  ifElse(has('x'), Either.Right, Either.Left)
+)
+
+console.log(getAndAdd({ y: 10 }))
 
 // Either.Right(10)
 //   .map(x => undefined)
