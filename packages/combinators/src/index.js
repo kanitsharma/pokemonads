@@ -5,5 +5,6 @@ import composeK from './composek'
 import map from './map'
 import chain from './chain'
 import curry from './curry'
+import run from './run'
 
-export { I, K, compose, map, chain, curry, composeK }
+export { I, K, compose, map, chain, curry, composeK, run }

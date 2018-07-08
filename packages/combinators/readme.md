@@ -33,3 +33,4 @@ Documentation coming up soon :)
 3.  of
 4.  ap
 5.  fold
+6.  run
