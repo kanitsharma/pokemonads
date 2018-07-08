@@ -1,5 +1,5 @@
 const { Maybe, Either, State, IO, Future, Reader } = require('./dist/main')
-const { map, chain, compose } = require('../combinators/dist/main')
+const { map, chain, compose, composeK, I } = require('../combinators/dist/main')
 const { prop, inc, ifElse, has } = require('ramda')
 
 // Maybe
@@ -22,9 +22,36 @@ const getAndAdd = compose(
 
 console.log(getAndAdd({ y: 10 }))
 
-// Either.Right(10)
-//   .map(x => undefined)
-//   .map(console.log)
+// IO
+
+const callToServer = x => {
+  console.log('Sent to server' + x)
+}
+
+const makeChangesToDOM = x => {
+  console.log('DOM changed to' + x)
+}
+
+const impure1 = x =>
+  IO.of(_ => {
+    callToServer(x) // side effect
+    return x
+  })
+
+const impure2 = x =>
+  IO.of(_ => {
+    makeChangesToDOM(x) // side effect
+    return x
+  })
+
+const impureComputation = composeK(
+  impure2,
+  impure1
+)
+
+const c = impureComputation(10)
+
+console.log(c.run())
 
 // const res1 = State.put(10)
 //   .map(x => x * 10)

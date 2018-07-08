@@ -44,7 +44,7 @@ console.log(addToObject(b)) // Nothing()
 
 ### Either
 
-Either (or the disjunct union) is a type that can either hold a value of type A or a value of type B but never at the same time. Typically it is used to represent computations that can fail with an error. Think of it as a better way to handle exceptions. We think of an Either as having two sides, the success is held on the right and the failure on the left. This is a right biased either which means that map and flatMap (bind) will operate on the right side of the either.
+Either (or the disjunct union) is a type that can either hold a value of type A or a value of type B but never at the same time. Typically it is used to represent computations that can fail with an error. Think of it as a better way to handle exceptions. We think of an Either as having two sides, the success is held on the right and the failure on the left. This is a right biased either which means that map and chain (flatMap) will operate on the right side of the either.
 
 ```javascript
 import { Either } from '@pokemonads/adts'
@@ -64,6 +64,40 @@ console.log(getAndAdd({ y: 10 })) // Left({ y: 10 })
 ### IO
 
 The IO monad is for isolating effects to maintain referential transparency in your software. Essentially you create a description of your effects of which is performed as the last action in your programme. The IO is lazy and will not be evaluated until the perform (alias run) method is called.
+
+```javascript
+import { IO } from '@pokemonads/adts'
+import { composeK } from '@pokemonads/combinators'
+
+const callToServer = x => {
+  console.log('Sent to server' + x)
+}
+
+const makeChangesToDOM = x => {
+  console.log('DOM changed to' + x)
+}
+
+const impure1 = x =>
+  IO.of(_ => {
+    callToServer(x) // side effect
+    return x
+  })
+
+const impure2 = x =>
+  IO.of(_ => {
+    makeChangesToDOM(x) // side effect
+    return x
+  })
+
+const impureComputation = composeK(
+  impure2,
+  impure1
+)
+
+const c = impureComputation(10)
+
+console.log(c.run())
+```
 
 ### Future
 
