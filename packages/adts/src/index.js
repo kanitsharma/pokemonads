@@ -5,5 +5,6 @@ import IO from './iomon'
 import Future from './futuremon'
 import Pair from './pairmon'
 import Reader from './readermon'
+import Do from './do'
 
-export { Maybe, Either, Reader, State, IO, Future, Pair }
+export { Maybe, Either, Reader, State, IO, Future, Pair, Do }

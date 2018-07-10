@@ -5,7 +5,8 @@ const {
   IO,
   Future,
   Reader,
-  Pair
+  Pair,
+  Do
 } = require('./dist/main')
 const { map, chain, compose, composeK } = require('../combinators/dist/main')
 const { prop, inc, ifElse, has } = require('ramda')
@@ -109,3 +110,14 @@ const ra = compose(
 const res = ra({ x: 10 }).run('This is config') // added config
 
 console.log(res)
+
+// do
+
+const da = Do(function*() {
+  const a = yield getAndAdd({ x: 10 }) // Either
+  const b = yield addToObject({ x: 20 }) // Maybe
+  const c = yield impure1(10) // IO
+  yield a + b + c
+})
+
+console.log(da)
