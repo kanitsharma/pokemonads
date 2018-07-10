@@ -181,3 +181,32 @@ const res = ra({ x: 10 }).run('This is config') // added config
 
 console.log(res) // This is config 11
 ```
+
+### Do notation (function)
+
+Do notation provides easy way to glue together multiple monadic values in sequence
+
+```javascript
+import { Do } from '@pokemonads/adts'
+
+// Lets take some example that we defined above
+
+// without Do
+getAndAdd({ x: 10 }).chain(a =>
+  addToObject({ x: 20 }).chain(b =>
+    impure1(10).chain(
+      c => console.log(a + b + c) // 42
+    )
+  )
+)
+
+// without Do
+const da = Do(function*() {
+  const a = yield getAndAdd({ x: 10 }) // Either
+  const b = yield addToObject({ x: 20 }) // Maybe
+  const c = yield impure1(10) // IO
+  yield a + b + c
+})
+
+console.log(da) // 42
+```
