@@ -1,6 +1,6 @@
 # Pokemonads
 
-<img src="https://raw.github.com/fantasyland/fantasy-land/master/logo.png" align="right" width="82" height="82" alt="Fantasy Land" />
+[<img src="https://raw.github.com/fantasyland/fantasy-land/master/logo.png" align="right" width="82" height="82" alt="Fantasy Land" />](https://github.com/fantasyland/fantasy-land/)
 
 Pokemonads is a collection of common algebraic data types and combinators which are compatible with [Fantasy Land](https://github.com/fantasyland/fantasy-land/)
 
