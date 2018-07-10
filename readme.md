@@ -2,8 +2,6 @@
 
 Pokemonads is a collection of common algebraic data types and combinators which are compatible with [Fantasy Land](https://github.com/fantasyland/fantasy-land/)
 
-documentation coming up soon :)
-
 ## Fistful of monads and more
 
 “Once you understand monads, you immediately become incapable of explaining them to anyone else” Lady Monadgreen’s curse ~ Gilad Bracha (used famously by Douglas Crockford)
@@ -15,6 +13,8 @@ A monad is a way of composing functions that require context in addition to the 
 - Monads flatten and map with context: Monad(Monad(a)) => Monad(b)
 
 Why do we need monads? [here](https://stackoverflow.com/questions/28139259/why-do-we-need-monads) is a great explanation
+
+## [See examples](https://github.com/kanitsharma/pokemonads/blob/master/packages/adts/readme.md)
 
 ## Installation
 
