@@ -184,7 +184,8 @@ console.log(res) // This is config 11
 
 ### Do notation (function)
 
-Do notation provides easy way to glue together multiple monadic values in sequence
+Do notation provides easy way to glue together multiple monadic values in sequence.
+Though do notation can be used for synchronous Futures like `Future.of(100)`, in order to use async Futures pokemonads provide AsyncDO
 
 ```javascript
 import { Do } from '@pokemonads/adts'
@@ -206,6 +207,24 @@ const da = Do(function*() {
   const b = yield addToObject({ x: 20 }) // Maybe
   const c = yield impure1(10) // IO
   yield a + b + c
+})
+
+console.log(da) // 42
+```
+
+### AsyncDo notation (function)
+
+Async do notation allows you to use async effects in sequence. Its called co-routine in promise land.
+
+```javascript
+import { AsyncDo } from '@pokemonads/adts'
+
+// without Do
+const ada = AsyncDo(function*() {
+  const a = yield asyncComp(20) // Future
+  const b = yield asyncComp(20) // Future
+  const c = yield asyncComp(20) // Future
+  return a + b
 })
 
 console.log(da) // 42
