@@ -117,7 +117,8 @@ const da = Do(function*() {
   const a = yield getAndAdd({ x: 10 }) // Either
   const b = yield addToObject({ x: 20 }) // Maybe
   const c = yield impure1(10) // IO
-  yield a + b + c
+  const d = yield Future.of(99) // Future
+  yield a + b + c + d
 })
 
 console.log(da)

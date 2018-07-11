@@ -1,23 +1,37 @@
-import IO from './iomon'
+const iterate = (itr, fn) => {
+  let x, Return
 
-const flatten = arr => (typeof arr[0] === 'object' ? flatten(arr[0]) : arr[0])
+  fn(val => {
+    Return = val
+    x = itr.next(val)
+    console.log(x)
+  })
 
-const iterate = (itr, val) =>
-  [itr.next(val)].map(
-    x =>
-      !x.done
-        ? typeof x.value === 'object' && 'chain' in x.value
-          ? 'run' in x.value
-            ? x.value.chain(y => IO(_ => iterate(itr, y))).run()
-            : x.value.chain(y => iterate(itr, y))
-          : iterate(itr, x.value)
-        : val
-  )
+  if (x.done) {
+    return Return
+  }
+
+  if (typeof x.value === 'object' && 'fork' in x.value) {
+    return iterate(itr, fn => x.value.fork(x => x, x => fn(x)))
+  }
+
+  if (typeof x.value === 'object' && 'run' in x.value) {
+    return iterate(itr, fn => x.value.map(x => fn(x)).run())
+  }
+
+  if (typeof x.value === 'object' && 'chain' in x.value) {
+    return iterate(itr, fn => x.value.chain(x => fn(x)))
+  }
+
+  if (typeof x.value !== 'object') {
+    return iterate(itr, fn => fn(x.value))
+  }
+}
 
 const d = f => {
   const itr = f()
-  const a = iterate(itr)
-  return flatten(a)
+  const a = iterate(itr, fn => fn(null))
+  return a
 }
 
 export default d
