@@ -6,7 +6,8 @@ const {
   Future,
   Reader,
   Pair,
-  Do
+  Do,
+  AsyncDo
 } = require('./dist/main')
 const { map, chain, compose, composeK } = require('../combinators/dist/main')
 const { prop, inc, ifElse, has } = require('ramda')
@@ -114,11 +115,21 @@ console.log(res)
 // do
 
 const da = Do(function*() {
-  const a = yield getAndAdd({ x: 10 }) // Either
-  const b = yield addToObject({ x: 20 }) // Maybe
+  const a = yield getAndAdd({ x: 1000000000 }) // Either
+  const b = yield addToObject({ x: 2000000000 }) // Maybe
   const c = yield impure1(10) // IO
   const d = yield Future.of(99) // Future
   yield a + b + c + d
 })
 
 console.log(da)
+
+// Async Do
+
+const ada = AsyncDo(function*() {
+  const a = yield asyncComp(20)
+  const b = yield asyncComp(20)
+  return a + b
+})
+
+ada.fork(console.error, console.log)

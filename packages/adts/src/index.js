@@ -6,5 +6,6 @@ import Future from './futuremon'
 import Pair from './pairmon'
 import Reader from './readermon'
 import Do from './do'
+import AsyncDo from './asyncdo'
 
-export { Maybe, Either, Reader, State, IO, Future, Pair, Do }
+export { Maybe, Either, Reader, State, IO, Future, Pair, Do, AsyncDo }
