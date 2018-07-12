@@ -1,4 +1,13 @@
-const { I, K, compose, composeK, curry, chain, run } = require('./dist/main')
+const {
+  I,
+  K,
+  compose,
+  composeK,
+  curry,
+  chain,
+  run,
+  tap
+} = require('./dist/main')
 
 const monad = x => ({
   map: fn => monad(fn(x)),
@@ -27,7 +36,8 @@ const b = curry((a, b) => a + b)
 console.log([1, 2, 3].map(b))
 
 const a = compose(
-  run(console.log),
+  run(),
+  chain(tap(console.log)),
   chain(x => monad(x + 1)),
   chain(x => monad(x + 20)),
   monad

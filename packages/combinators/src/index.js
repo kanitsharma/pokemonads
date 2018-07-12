@@ -6,5 +6,6 @@ import map from './map'
 import chain from './chain'
 import curry from './curry'
 import run from './run'
+import tap from './tap'
 
-export { I, K, compose, map, chain, curry, composeK, run }
+export { I, K, compose, map, chain, curry, composeK, run, tap }
