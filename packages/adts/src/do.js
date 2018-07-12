@@ -4,7 +4,6 @@ const iterate = (itr, fn) => {
   fn(val => {
     Return = val
     x = itr.next(val)
-    console.log(x)
   })
 
   if (x.done) {
