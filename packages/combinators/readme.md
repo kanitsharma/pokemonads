@@ -25,6 +25,7 @@ Documentation coming up soon :)
 1.  compose
 2.  composeK
 3.  curry
+4.  tap
 
 ### Point-free
 
