@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "test": "node test.js",
+    "test": "ava test.js",
     "build": "webpack --mode=production"
   },
   "homepage": "https://github.com/kanitsharma/pokemonads",
@@ -28,6 +28,7 @@
   "author": "kanitsharma",
   "license": "MIT",
   "dependencies": {
+    "ava": "^0.25.0",
     "ramda": "^0.25.0"
   }
 }

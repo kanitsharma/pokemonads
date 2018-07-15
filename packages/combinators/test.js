@@ -9,6 +9,8 @@ const {
   tap
 } = require('./dist/main')
 
+const test = require('ava')
+
 const monad = x => ({
   map: fn => monad(fn(x)),
   chain: mfn => mfn(x),
@@ -16,31 +18,34 @@ const monad = x => ({
   run: fn => fn(x)
 })
 
-console.log(
-  compose(
+test('I and K combinators', t => {
+  const a = compose(
     I,
     K
-  )(20)()
-)
+  )
 
-console.log(
-  composeK(
+  t.deepEqual(a(20)(), 20)
+  t.deepEqual(a(-20)(), -20)
+})
+
+test('composeK', t => {
+  const a = composeK(
     x => monad(x + 10),
     x => monad(x + 20),
     (x, y, z) => monad(x + y + z)
-  )(1, 2, 3).fold()
-)
+  )
 
-const b = curry((a, b) => a + b)
+  t.deepEqual(a(1, 2, 3).fold(), 36)
+})
 
-console.log([1, 2, 3].map(b))
+test('pointfree', t => {
+  const a = compose(
+    run(),
+    chain(tap(console.log)),
+    chain(x => monad(x + 1)),
+    chain(x => monad(x + 20)),
+    monad
+  )
 
-const a = compose(
-  run(),
-  chain(tap(console.log)),
-  chain(x => monad(x + 1)),
-  chain(x => monad(x + 20)),
-  monad
-)
-
-a(1)
+  t.deepEqual(typeof a(1), 'function')
+})
