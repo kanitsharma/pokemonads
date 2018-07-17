@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "test": "node test.js",
+    "test": "ava test.js",
     "build": "webpack --mode=production"
   },
   "keywords": [
@@ -30,6 +30,7 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
+    "ava": "^0.25.0",
     "daggy": "^1.2.0",
     "fluture": "^8.0.2"
   }

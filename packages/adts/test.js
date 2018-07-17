@@ -12,124 +12,159 @@ const {
 const { map, chain, compose, composeK } = require('../combinators/dist/main')
 const { prop, inc, ifElse, has } = require('ramda')
 
+const test = require('ava')
+
 // Maybe
-const ma = { x: 10 }
 
-const addToObject = compose(
-  map(inc),
-  map(prop('x')),
-  Maybe.of
-)
+test('Maybe test', t => {
+  const ma = { x: 10 }
 
-console.log(addToObject(ma))
+  const addToObject = compose(
+    map(inc),
+    map(prop('x')),
+    Maybe.of
+  )
+
+  const test = addToObject(ma).inspect()
+  const test2 = addToObject({ y: 11 }).inspect()
+
+  t.is(test, 'Just(11)')
+  t.is(test2, 'Nothing()')
+})
 
 // Either
-const getAndAdd = compose(
-  map(inc),
-  map(prop('x')),
-  ifElse(has('x'), Either.Right, Either.Left)
-)
 
-console.log(getAndAdd({ y: 10 }))
+test('Either test', t => {
+  const getAndAdd = compose(
+    map(inc),
+    map(prop('x')),
+    ifElse(has('x'), Either.Right, Either.Left)
+  )
+
+  const test = getAndAdd({ x: 10 }).inspect()
+  const test2 = getAndAdd({ y: 10 }).inspect()
+
+  t.is(test, 'Right(11)')
+  t.is(test2, 'Left([object Object])')
+})
 
 // IO
 
-const callToServer = x => {
-  console.log('Sent to server' + x)
-}
+test('IO monad', t => {
+  const callToServer = x => {
+    console.log('Effect run')
+  }
 
-const makeChangesToDOM = x => {
-  console.log('DOM changed to' + x)
-}
+  const makeChangesToDOM = x => {
+    console.log('Effect run')
+  }
 
-const impure1 = x =>
-  IO.of(_ => {
-    callToServer(x) // side effect
-    return x
-  })
+  const impure1 = x =>
+    IO.of(_ => {
+      callToServer(x) // side effect
+      return x
+    })
 
-const impure2 = x =>
-  IO.of(_ => {
-    makeChangesToDOM(x) // side effect
-    return x
-  })
+  const impure2 = x =>
+    IO.of(_ => {
+      makeChangesToDOM(x) // side effect
+      return x
+    })
 
-const impureComputation = composeK(
-  impure2,
-  impure1
-)
+  const impureComputation = composeK(
+    impure2,
+    impure1
+  )
 
-const c = impureComputation(10)
+  const test = impureComputation(10).run()
 
-console.log(c.run())
+  t.is(test, 10)
+})
 
 // Future
 
-const apiCall = x =>
-  Future((_, resolve) => {
-    setTimeout(_ => resolve({ a: x }), 500)
-  })
+test('Future Monad', async t => {
+  const apiCall = x =>
+    Future((_, resolve) => {
+      setTimeout(_ => resolve({ a: x }), 500)
+    })
 
-const asyncComp = compose(
-  map(inc),
-  map(prop('a')),
-  apiCall
-)
+  const asyncComp = compose(
+    map(inc),
+    map(prop('a')),
+    apiCall
+  )
 
-asyncComp(10).value(console.log)
+  const futureTest = future =>
+    new Promise(resolve => {
+      future.value(resolve)
+    })
+
+  const test = await futureTest(asyncComp(10))
+
+  t.is(test, 11)
+})
 
 // Pair
 
-const a = Pair(10, 11)
-console.log(a.fst(), a.snd())
+test('Pair', t => {
+  const test = Pair(10, 11)
+  const fTest = test.map(inc)
+  const mTest = test.chain(({ value, state }) => Pair(value, state + 1))
 
-// State
-
-const comp1 = x => x + ' Comp1'
-
-const comp2 = x => x + ' Comp2'
-
-const sa = compose(
-  map(comp2),
-  map(comp1),
-  State.of
-)
-
-console.log(sa('Yo').eval())
-
-// Reader
-
-const getConfig = x => map(config => config + x, Reader.ask)
-
-const ra = compose(
-  chain(getConfig),
-  map(inc),
-  map(prop('x')),
-  Reader.of
-)
-
-const res = ra({ x: 10 }).run('This is config') // added config
-
-console.log(res)
-
-// do
-
-const da = Do(function*() {
-  const a = yield getAndAdd({ x: 1000000000 }) // Either
-  const b = yield addToObject({ x: 2000000000 }) // Maybe
-  const c = yield impure1(10) // IO
-  const d = yield Future.of(99) // Future
-  yield a + b + c + d
+  t.is(test.fst(), 10) // Do not test the abstraction
+  t.is(test.snd(), 11)
+  t.is(fTest.snd(), 12) // Functor
+  t.is(mTest.snd(), 12) // Monad
 })
 
-console.log(da)
+// // State
 
-// Async Do
+// const comp1 = x => x + ' Comp1'
 
-const ada = AsyncDo(function*() {
-  const a = yield asyncComp(20)
-  const b = yield asyncComp(20)
-  return a + b
-})
+// const comp2 = x => x + ' Comp2'
 
-ada.fork(console.error, console.log)
+// const sa = compose(
+//   map(comp2),
+//   map(comp1),
+//   State.of
+// )
+
+// console.log(sa('Yo').eval())
+
+// // Reader
+
+// const getConfig = x => map(config => config + x, Reader.ask)
+
+// const ra = compose(
+//   chain(getConfig),
+//   map(inc),
+//   map(prop('x')),
+//   Reader.of
+// )
+
+// const res = ra({ x: 10 }).run('This is config') // added config
+
+// console.log(res)
+
+// // do
+
+// const da = Do(function*() {
+//   const a = yield getAndAdd({ x: 1000000000 }) // Either
+//   const b = yield addToObject({ x: 2000000000 }) // Maybe
+//   const c = yield impure1(10) // IO
+//   const d = yield Future.of(99) // Future
+//   yield a + b + c + d
+// })
+
+// console.log(da)
+
+// // Async Do
+
+// const ada = AsyncDo(function*() {
+//   const a = yield asyncComp(20)
+//   const b = yield asyncComp(20)
+//   return a + b
+// })
+
+// ada.fork(console.error, console.log)
