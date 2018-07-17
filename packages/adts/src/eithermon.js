@@ -60,4 +60,11 @@ Either.prototype.traverse = function(f, p) {
   })
 }
 
+Either.prototype.inspect = function() {
+  return this.cata({
+    Left: l => `Left(${l})`,
+    Right: r => `Right(${r})`
+  })
+}
+
 export default Either
