@@ -118,32 +118,40 @@ test('Pair', t => {
   t.is(mTest.snd(), 12) // Monad
 })
 
-// // State
+// State
 
-// const comp1 = x => x + ' Comp1'
+test('State monad', t => {
+  const comp1 = x => State(s => Pair(x + ' Comp1', s + ' State'))
 
-// const comp2 = x => x + ' Comp2'
+  const comp2 = x => x + ' Comp2'
 
-// const sa = compose(
-//   map(comp2),
-//   map(comp1),
-//   State.of
-// )
+  const sa = compose(
+    map(comp2),
+    chain(comp1),
+    State.of
+  )
 
-// console.log(sa('Yo').eval())
+  const test = sa('Started')
 
-// // Reader
+  t.is(test.eval(), 'Started Comp1 Comp2')
+  t.is(test.exec(), 'undefined State')
+})
 
-// const getConfig = x => map(config => config + x, Reader.ask)
+// Reader
+test('Reader Monad', t => {
+  const getConfig = x => map(config => config + x, Reader.ask)
 
-// const ra = compose(
-//   chain(getConfig),
-//   map(inc),
-//   map(prop('x')),
-//   Reader.of
-// )
+  const ra = compose(
+    chain(getConfig),
+    map(inc),
+    map(prop('x')),
+    Reader.of
+  )
 
-// const res = ra({ x: 10 }).run('This is config') // added config
+  const test = ra({ x: 10 }) // added config
+
+  t.is(test.run('This is config'), 'This is config11')
+})
 
 // console.log(res)
 
