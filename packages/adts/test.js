@@ -9,7 +9,13 @@ const {
   Do,
   AsyncDo
 } = require('./dist/main')
-const { map, chain, compose, composeK } = require('../combinators/dist/main')
+const {
+  map,
+  chain,
+  compose,
+  composeK,
+  tap
+} = require('../combinators/dist/main')
 const { prop, inc, ifElse, has } = require('ramda')
 
 const test = require('ava')
@@ -130,7 +136,9 @@ test('State monad', t => {
 
   const sa = compose(
     map(comp2),
+    map(tap(console.log)),
     chain(comp1),
+    map(tap(console.log)),
     State.of
   )
 

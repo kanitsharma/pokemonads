@@ -1,33 +1,16 @@
-// TODO: implement functor. monad, monoid
+import { K } from '../../combinators/src'
 
-import { tagged } from 'daggy'
+const Pair = (value, state) => {
+  const fst = K(value)
+  const snd = K(state)
+  // Funtor :: Fa -> (a -> b) -> Fb
+  const map = fn => Pair(value, fn(state))
+  // Chain :: Ma -> (a -> Mb) -> Mb
+  const chain = fn => fn({ value, state })
+  // Bimap :: Fab -> (a -> c) -> (b -> d) -> Fcd
+  const bimap = (f, g) => Pair(f(value), g(state))
 
-const Pair = tagged('Pair', ['value', 'state'])
-
-Pair.prototype.fst = function() {
-  return this.value
-}
-
-Pair.prototype.snd = function() {
-  return this.state
-}
-
-// Funtor :: Fa -> (a -> b) -> Fb
-
-Pair.prototype.map = function(fn) {
-  return Pair(this.value, fn(this.state))
-}
-
-// Monad :: Ma -> (a -> Mb) -> Mb
-
-Pair.prototype.chain = function(fn) {
-  return fn(this)
-}
-
-// Bimap :: Fab -> (a -> c) -> (b -> d) -> Fcd
-
-Pair.prototype.bimap = function(f, g) {
-  return Pair(f(this.value), g(this.state))
+  return { fst, snd, map, chain, bimap, value, state }
 }
 
 export default Pair
