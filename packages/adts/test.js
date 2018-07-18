@@ -153,26 +153,58 @@ test('Reader Monad', t => {
   t.is(test.run('This is config'), 'This is config11')
 })
 
-// console.log(res)
+// do
 
-// // do
+test('Do notation', t => {
+  const getAndAdd = compose(
+    map(inc),
+    map(prop('x')),
+    ifElse(has('x'), Either.Right, Either.Left)
+  )
 
-// const da = Do(function*() {
-//   const a = yield getAndAdd({ x: 1000000000 }) // Either
-//   const b = yield addToObject({ x: 2000000000 }) // Maybe
-//   const c = yield impure1(10) // IO
-//   const d = yield Future.of(99) // Future
-//   yield a + b + c + d
-// })
+  const addToObject = compose(
+    map(inc),
+    map(prop('x')),
+    Maybe.of
+  )
 
-// console.log(da)
+  const test = Do(function*() {
+    const a = yield getAndAdd({ x: 1000000000 }) // Either
+    const b = yield addToObject({ x: 2000000000 }) // Maybe
+    const c = yield Future.of(99) // Future
+    yield a + b + c
+  })
 
-// // Async Do
+  console.log(test)
+  t.is(test, 3000000101)
+})
 
-// const ada = AsyncDo(function*() {
-//   const a = yield asyncComp(20)
-//   const b = yield asyncComp(20)
-//   return a + b
-// })
+// Async Do
 
-// ada.fork(console.error, console.log)
+test('AsyncDo Notation', async t => {
+  const apiCall = x =>
+    Future((_, resolve) => {
+      setTimeout(_ => resolve({ a: x }), 500)
+    })
+
+  const asyncComp = compose(
+    map(inc),
+    map(prop('a')),
+    apiCall
+  )
+
+  const ada = AsyncDo(function*() {
+    const a = yield asyncComp(20)
+    const b = yield asyncComp(20)
+    return a + b
+  })
+
+  const testAsync = f =>
+    new Promise(resolve => {
+      ada.fork(console.error, resolve)
+    })
+
+  const test = await testAsync(ada)
+
+  t.is(test, 42)
+})
