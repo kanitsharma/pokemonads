@@ -111,11 +111,14 @@ test('Pair', t => {
   const test = Pair(10, 11)
   const fTest = test.map(inc)
   const mTest = test.chain(({ value, state }) => Pair(value, state + 1))
+  const bimapTest = test.bimap(inc, x => x - 1)
 
   t.is(test.fst(), 10) // Do not test the abstraction
   t.is(test.snd(), 11)
   t.is(fTest.snd(), 12) // Functor
   t.is(mTest.snd(), 12) // Monad
+  t.is(bimapTest.fst(), 11) // Bimap
+  t.is(bimapTest.snd(), 10) // Bimap
 })
 
 // State
