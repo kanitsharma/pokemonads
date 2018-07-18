@@ -26,4 +26,8 @@ Pair.prototype.chain = function(fn) {
 
 // Bimap :: Fab -> (a -> c) -> (b -> d) -> Fcd
 
+Pair.prototype.bimap = function(f, g) {
+  return Pair(f(this.value), g(this.state))
+}
+
 export default Pair
