@@ -1,13 +1,15 @@
 {
   "name": "@pokemonads/combinators",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "",
   "main": "dist/main.js",
   "scripts": {
     "test": "../../node_modules/.bin/ava test.js",
     "build": "node build.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "homepage": "https://github.com/kanitsharma/pokemonads",
   "repository": {
     "type": "git",
