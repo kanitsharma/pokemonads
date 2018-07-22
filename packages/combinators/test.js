@@ -1,4 +1,4 @@
-const { I, K, compose, composeK, chain, run, tap } = require('./dist/main')
+const { I, K, compose, composeK, chain, run, tap, ap } = require('./dist/main')
 
 const test = require('ava')
 
@@ -6,7 +6,8 @@ const monad = x => ({
   map: fn => monad(fn(x)),
   chain: mfn => mfn(x),
   fold: _ => x,
-  run: fn => fn(x)
+  run: fn => fn(x),
+  ap: a => chain(x => a.map(x))
 })
 
 test('I and K combinators', t => {
@@ -32,6 +33,7 @@ test('composeK', t => {
 test('pointfree', t => {
   const a = compose(
     run(),
+    ap(monad(10)),
     chain(tap(console.log)),
     chain(x => monad(x + 1)),
     chain(x => monad(x + 20)),
