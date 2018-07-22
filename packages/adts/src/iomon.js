@@ -1,4 +1,4 @@
-import { K, compose } from '../../combinators/src/index'
+import { K, compose } from '@pokemonads/combinators'
 
 const IO = g => {
   const map = f =>

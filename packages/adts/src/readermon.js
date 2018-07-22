@@ -1,5 +1,5 @@
 import { tagged } from 'daggy'
-import { K, I } from '../../combinators/src/index'
+import { K, I } from '@pokemonads/combinators'
 
 const Reader = tagged('Reader', ['run'])
 

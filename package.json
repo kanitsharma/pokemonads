@@ -2,11 +2,7 @@
   "name": "pokemonads",
   "version": "0.0.1",
   "description": "Fistful of monads and more",
-  "main": "dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node buildscripts/start.js",
-    "build": "webpack --mode=production",
     "publish": "lerna run build && lerna publish"
   },
   "homepage": "https://github.com/kanitsharma/pokemonads",
@@ -20,26 +16,19 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.46",
-    "@babel/plugin-proposal-pipeline-operator": "^7.0.0-beta.51",
-    "@babel/preset-env": "^7.0.0-beta.51",
-    "ava": "^0.25.0",
-    "babel-eslint": "^8.2.3",
-    "babel-preset-env": "^2.0.0-alpha.20",
-    "eslint": "^4.19.1",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-babel": "^4.1.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-node": "^4.2.2",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "lerna": "^2.11.0",
-    "prettier": "^1.13.5",
-    "webpack": "^4.12.0",
-    "webpack-cli": "^3.0.4"
-  },
-  "dependencies": {
-    "daggy": "^1.2.0"
+    "@lectro/core": "1.1.2-alpha-19",
+    "@lectro/enhancer-buildutils": "0.1.0-alpha-7",
+    "ava": "0.25.0",
+    "babel-eslint": "8.2.3",
+    "eslint": "4.19.1",
+    "eslint-config-standard": "10.2.1",
+    "eslint-plugin-babel": "4.1.1",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-node": "4.2.2",
+    "eslint-plugin-prettier": "2.6.0",
+    "eslint-plugin-promise": "3.5.0",
+    "eslint-plugin-standard": "3.0.1",
+    "lerna": "2.11.0",
+    "prettier": "1.13.5"
   }
 }

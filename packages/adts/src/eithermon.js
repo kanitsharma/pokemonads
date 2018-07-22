@@ -1,6 +1,6 @@
 // Either Type
 import { taggedSum } from 'daggy'
-import { I } from '../../combinators/src/index'
+import { I } from '@pokemonads/combinators'
 
 const Either = taggedSum('Either', {
   Left: ['l'],
