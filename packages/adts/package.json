@@ -1,13 +1,15 @@
 {
   "name": "@pokemonads/adts",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "",
   "main": "dist/main.js",
   "scripts": {
     "test": "../../node_modules/.bin/ava test.js test.js",
     "build": "node build.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "functional-programming",
     "monads",
@@ -26,7 +28,7 @@
   "author": "kanitsharma",
   "license": "MIT",
   "dependencies": {
-    "@pokemonads/combinators": "^0.0.11",
+    "@pokemonads/combinators": "^0.0.12",
     "daggy": "1.2.0",
     "fluture": "8.0.2"
   }
