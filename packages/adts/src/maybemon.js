@@ -1,6 +1,6 @@
 // Maybe type
 import { taggedSum } from 'daggy'
-import { K, I } from '../../combinators/src/index'
+import { K, I } from '@pokemonads/combinators'
 
 const Maybe = taggedSum('Maybe', {
   Just: ['x'],
@@ -35,7 +35,7 @@ Maybe.prototype.orElse = function(x) {
 }
 
 Maybe.prototype.getOrElse = function(x) {
-  return this.fold(i, K(x))
+  return this.fold(I, K(x))
 }
 
 Maybe.prototype.chain = function(f) {

@@ -1,4 +1,4 @@
-import { K } from '../../combinators/src'
+import { K } from '@pokemonads/combinators'
 
 const Pair = (value, state) => {
   const fst = K(value)

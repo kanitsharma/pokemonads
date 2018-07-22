@@ -1,13 +1,4 @@
-const {
-  I,
-  K,
-  compose,
-  composeK,
-  curry,
-  chain,
-  run,
-  tap
-} = require('./dist/main')
+const { I, K, compose, composeK, chain, run, tap } = require('./dist/main')
 
 const test = require('ava')
 
