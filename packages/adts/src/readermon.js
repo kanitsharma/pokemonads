@@ -1,22 +1,31 @@
-import { tagged } from 'daggy'
-import { K, I } from '@pokemonads/combinators'
+import { K, I, compose } from '@pokemonads/combinators'
 
-const Reader = tagged('Reader', ['run'])
+const Reader = Fn => {
+  const run = x => Fn(x)
+  const map = g =>
+    Reader(
+      compose(
+        g,
+        run
+      )
+    )
+  const chain = g =>
+    Reader(config =>
+      compose(
+        x => x.run(config),
+        g,
+        run
+      )(config)
+    )
+  const ap = a => chain(a.map)
 
-Reader.of = a => Reader(K(a))
+  return { run, map, chain, ap }
+}
 
+Reader.of = compose(
+  Reader,
+  K
+)
 Reader.ask = Reader(I)
-
-Reader.prototype.chain = function(f) {
-  return Reader(e => f(this.run(e)).run(e))
-}
-
-Reader.prototype.map = function(f) {
-  return this.chain(a => Reader.of(f(a)))
-}
-
-Reader.prototype.ap = function(a) {
-  return this.chain(f => a.map(f))
-}
 
 export default Reader

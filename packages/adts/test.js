@@ -160,8 +160,7 @@ test('Reader Monad', t => {
   )
 
   const test = ra({ x: 10 }) // added config
-
-  t.is(test.run('This is config'), 'This is config11')
+  t.is(test.run('Yo'), 'Yo11')
 })
 
 // do
