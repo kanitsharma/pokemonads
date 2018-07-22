@@ -1,4 +1,4 @@
-import { K, I, compose } from '@pokemonads/combinators'
+import { K, I, compose, run as Run, map as Map } from '@pokemonads/combinators'
 
 const Reader = Fn => {
   const run = x => Fn(x)
@@ -12,12 +12,15 @@ const Reader = Fn => {
   const chain = g =>
     Reader(config =>
       compose(
-        x => x.run(config),
+        Run(config),
         g,
         run
       )(config)
     )
-  const ap = a => chain(a.map)
+  const ap = compose(
+    chain,
+    a => x => Map(x)(a)
+  )
 
   return { run, map, chain, ap }
 }
