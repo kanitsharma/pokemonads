@@ -1,4 +1,5 @@
 import { K, I, compose, run as Run, map as Map } from '@pokemonads/combinators'
+import { flip } from 'ramda'
 
 const Reader = Fn => {
   const run = x => Fn(x)
@@ -19,7 +20,7 @@ const Reader = Fn => {
     )
   const ap = compose(
     chain,
-    a => x => Map(x)(a)
+    flip(Map)
   )
 
   return { run, map, chain, ap }

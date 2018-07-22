@@ -14,7 +14,9 @@ const {
   chain,
   compose,
   composeK,
-  tap
+  tap,
+  ap,
+  I
 } = require('../combinators/dist/main')
 const { prop, inc, ifElse, has } = require('ramda')
 
@@ -154,12 +156,11 @@ test('Reader Monad', t => {
 
   const ra = compose(
     chain(getConfig),
-    map(inc),
-    map(prop('x')),
+    ap(Reader.of(x => x + 1)),
     Reader.of
   )
 
-  const test = ra({ x: 10 }) // added config
+  const test = ra(10)
   t.is(test.run('Yo'), 'Yo11')
 })
 
