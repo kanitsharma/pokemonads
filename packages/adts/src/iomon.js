@@ -1,14 +1,16 @@
 import { K, compose } from '@pokemonads/combinators'
 
 const IO = g => {
+  // Funtor :: (a -> b) -> Fa -> Fb
   const map = f =>
-    compose(
-      IO,
-      K,
-      f,
-      g
-    )()
+    IO(_ =>
+      compose(
+        f,
+        g
+      )()
+    )
 
+  // Chain :: (a -> Mb) -> Ma -> Mb
   const chain = f =>
     IO(_ =>
       compose(
@@ -17,6 +19,7 @@ const IO = g => {
       )().run()
     )
 
+  // Applicative ap :: ma -> mb -> mab
   const ap = a => chain(a.map)
 
   const run = _ => g()
