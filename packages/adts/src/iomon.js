@@ -1,4 +1,4 @@
-import { K, compose } from '@pokemonads/combinators'
+import { compose } from '@pokemonads/combinators'
 
 const IO = g => {
   // Funtor :: (a -> b) -> Fa -> Fb

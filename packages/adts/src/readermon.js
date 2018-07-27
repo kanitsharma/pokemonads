@@ -3,6 +3,8 @@ import { flip } from 'ramda'
 
 const Reader = Fn => {
   const run = x => Fn(x)
+
+  // Funtor :: (a -> b) -> Fa -> Fb
   const map = g =>
     Reader(
       compose(
@@ -10,6 +12,8 @@ const Reader = Fn => {
         run
       )
     )
+
+  // Chain :: (a -> Mb) -> Ma -> Mb
   const chain = g =>
     Reader(config =>
       compose(
@@ -18,6 +22,8 @@ const Reader = Fn => {
         run
       )(config)
     )
+
+  // Applicative ap :: ma -> mb -> mab
   const ap = compose(
     chain,
     flip(Map)
