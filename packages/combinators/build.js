@@ -1,4 +1,4 @@
 const path = require('path')
-const { PokemonadsADTs } = require('../../webpack.config')
+const { PokemonadsCombinators } = require('../../webpack.config')
 
-PokemonadsADTs.setOutputPath(path.resolve(__dirname, 'dist')).build()
+PokemonadsCombinators.setOutputPath(path.resolve(__dirname, 'dist')).build()
