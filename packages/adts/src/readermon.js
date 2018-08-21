@@ -1,5 +1,11 @@
-import { K, I, compose, run as Run, map as Map } from '@pokemonads/combinators'
-import { flip } from 'ramda'
+import {
+  K,
+  I,
+  compose,
+  run as Run,
+  map as Map,
+  flip
+} from '@pokemonads/combinators'
 
 const Reader = Fn => {
   const run = x => Fn(x)
