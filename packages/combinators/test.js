@@ -1,4 +1,15 @@
-const { I, K, compose, composeK, chain, run, tap, ap } = require('./dist/main')
+const {
+  I,
+  K,
+  compose,
+  composeK,
+  chain,
+  run,
+  tap,
+  ap,
+  flip,
+  curry
+} = require('./dist/main')
 
 const test = require('ava')
 
@@ -32,7 +43,7 @@ test('composeK', t => {
 
 test('pointfree', t => {
   const a = compose(
-    run(),
+    run,
     ap(monad(10)),
     chain(tap(console.log)),
     chain(x => monad(x + 1)),
@@ -41,4 +52,20 @@ test('pointfree', t => {
   )
 
   t.deepEqual(typeof a(1), 'function')
+})
+
+test('flip', t => {
+  const a = curry((x, y) => [x, y])
+  const flipped = flip(a)
+
+  t.deepEqual(flipped(1, 2), [2, 1])
+  t.deepEqual(flipped(1)(2), [2, 1])
+})
+
+test('curry', t => {
+  const add = (a, b) => a + b
+  const curried = curry(add)
+
+  t.deepEqual(curried(1)(2), 3)
+  t.deepEqual(curried(1, 2), 3)
 })
