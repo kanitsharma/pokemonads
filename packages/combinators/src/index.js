@@ -8,5 +8,7 @@ import curry from './curry'
 import run from './run'
 import tap from './tap'
 import ap from './ap'
+import unary from './unary'
+import flip from './flip'
 
-export { I, K, compose, map, chain, curry, composeK, run, tap, ap }
+export { I, K, compose, map, chain, curry, composeK, run, tap, ap, unary, flip }

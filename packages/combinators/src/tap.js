@@ -1,4 +1,4 @@
-import { curry } from 'ramda'
+import curry from './curry'
 
 export default curry((fn, x) => {
   fn(x)

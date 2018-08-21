@@ -1,8 +1,8 @@
 import compose from './compose'
 import chain from './chain'
-import { unary, reverse } from 'ramda'
+import unary from './unary'
 
-const argsToListandRev = f => (...args) => f(reverse(args))
+const argsToListandRev = f => (...args) => f([...args].reverse())
 
 const composeK = argsToListandRev(([last, ...first]) =>
   compose(
