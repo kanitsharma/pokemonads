@@ -1,6 +1,6 @@
 {
   "name": "@pokemonads/adts",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "",
   "main": "dist/main.js",
   "scripts": {
@@ -28,7 +28,7 @@
   "author": "kanitsharma",
   "license": "MIT",
   "devDependencies": {
-    "@pokemonads/combinators": "^0.0.12",
+    "@pokemonads/combinators": "^0.0.13",
     "daggy": "1.2.0",
     "fluture": "8.0.2"
   }
