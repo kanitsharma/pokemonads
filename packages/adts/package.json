@@ -27,7 +27,7 @@
   },
   "author": "kanitsharma",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "@pokemonads/combinators": "^0.0.13",
     "daggy": "1.2.0",
     "fluture": "8.0.2"
