@@ -201,7 +201,7 @@ getAndAdd({ x: 10 }).chain(a =>
   )
 )
 
-// without Do
+// with Do
 const da = Do(function*() {
   const a = yield getAndAdd({ x: 10 }) // Either
   const b = yield addToObject({ x: 20 }) // Maybe
@@ -219,7 +219,7 @@ Async do notation allows you to use async effects in sequence. Its called co-rou
 ```javascript
 import { AsyncDo } from '@pokemonads/adts'
 
-// without Do
+// with AsyncDo
 const ada = AsyncDo(function*() {
   const a = yield asyncComp(20) // Future
   const b = yield asyncComp(20) // Future
